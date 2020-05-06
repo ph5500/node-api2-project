@@ -87,6 +87,29 @@ router.get("/:id", (req, res) => {
         });
 });
 
+router.get("/:id/comments", (req, res) => {
+    Posts.findPostComments(req.params.id)
+        .then(comments => {
+            if (comments.length > 0) {
+                res.status(200).json(comments);
+            } else {
+                res.status(404).json({
+                    errorMessage: "The post with the specified ID does not exist."
+                });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                errorMessage: "The comments information could not be retrieved."
+            });
+        });
+});
+
+
+
+
+
 //DELETE requests
 router.delete("/:id", (req, res) => {
     Posts.remove(req.params.id)
