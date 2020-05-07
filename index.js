@@ -6,6 +6,8 @@ const server = express();
 
 server.use(express.json());
 
+// require("dotenv").config();
+
 server.use("/api/posts", dbRouter);
 
 
